@@ -1,7 +1,5 @@
-// MAKE A VIRTUAL friendCount THAT GETS THE LENGTH OF [friends] ON QUERY
-
 const { Schema, model } = require('mongoose');
-const thoughtSchema = require('./Thought')
+const Thought = require('./Thought')
 
 //schema for User model
 const userSchema = new Schema(
@@ -18,15 +16,24 @@ const userSchema = new Schema(
             required: true,
             //require validation
         },
-        thoughts: [thoughtSchema],
-        friends: [userSchema],
+        thoughts: [Thought.schema],
+        friends: [this],
     },
     {
         toJSON: {
             getters: true,
+            virtuals: true,
         },
     }
 );
+
+//virtual property 'friendcount'
+userSchema
+    .virtual('friendcount')
+    //getter
+    .get(function () {
+        return this.friends.length;
+    })
 
 //make a User model from the userSchema
 const User = model('user', userSchema);
