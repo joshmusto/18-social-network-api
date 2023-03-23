@@ -1,5 +1,3 @@
-// MAKE A VIRTUAL reactionCount THAT GETS THE LENGTH OF [reactions] ON QUERY
-
 const { Schema, model } = require('mongoose');
 const reactionSchema = require('./Reaction');
 
@@ -28,6 +26,14 @@ const thoughtSchema = new Schema(
         },
     }
 );
+
+//virtual property 'friendcount'
+thoughtSchema
+    .virtual('reactionCount')
+    //getter
+    .get(function () {
+        return this.reactions.length;
+    })
 
 //make a User model from the userSchema
 const Thought = model('thought', thoughtSchema);
