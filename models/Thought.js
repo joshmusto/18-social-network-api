@@ -27,7 +27,7 @@ const thoughtSchema = new Schema(
     }
 );
 
-//virtual property 'friendcount'
+//virtual property 'reactioncount'
 thoughtSchema
     .virtual('reactionCount')
     //getter
