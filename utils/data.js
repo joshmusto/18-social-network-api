@@ -55,7 +55,7 @@ const getEmail = (int) => {
 const getRandomThoughts = (int) => {
     const results = [];
     for (let i=0; i<int; i++) {
-        results.push(getRandomArrayItem(thoughts));
+        results.push(`${getRandomArrayItem(thoughts)}`);
     }
     return results;
 };

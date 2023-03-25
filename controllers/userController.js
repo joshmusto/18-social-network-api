@@ -1,4 +1,3 @@
-const { ObjectId } = require('mongoose').Types;
 const { User, Thought } = require('../models');
 
 //export functions to be easily called in routes/api files
@@ -47,8 +46,8 @@ module.exports = {
         )
             .then((user) => 
                 !user
-                ? res.status(404).json({ message: 'There is no user with that ID '})
-                : res.json({ message: 'User has been updated '})
+                ? res.status(404).json({ message: 'There is no user with that ID' })
+                : res.json({ message: 'User has been updated' })
             )
             .catch((err) => res.status(500).json(err));
     },
@@ -60,7 +59,8 @@ module.exports = {
                     ? res.status(404).json({ message: 'There is no user with that ID' })
                     : Thought.deleteMany(
                         { username: user.username }
-                    )
+                      ),
+                      res.json({message:'User and thoughts have been deleted'})
             )
             .catch((err) => {
                 console.log(err);
@@ -93,5 +93,5 @@ module.exports = {
                 : res.json({ message: 'User has been removed from the friends list'})
             )
             .catch((err) => res.status(500).json(err));
-    }
-}
+    },
+};
